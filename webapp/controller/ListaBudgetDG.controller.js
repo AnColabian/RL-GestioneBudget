@@ -3,9 +3,10 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
+    "sap/ui/model/Sorter",
     "sap/m/MessageBox",
     "rlbudget/model/formatter"
-], function (Controller, JSONModel, Filter, FilterOperator, MessageBox, formatter) {
+], function (Controller, JSONModel, Filter, FilterOperator, Sorter, MessageBox, formatter) {
     "use strict";
     return Controller.extend("rlbudget.controller.ListaBudgetDG", {
         formatter: formatter,
@@ -23,7 +24,7 @@ sap.ui.define([
                 .attachPatternMatched(this._onRouteMatched, this);
         },
         _onRouteMatched: function () {
-            this._applicaFiltri();
+            this._caricaDati();
         },
         _popolaAnni: function (iAnnoCorrente) {
             var aAnni = [{ key: "", text: this._getText("lblTutti") }];
@@ -44,16 +45,38 @@ sap.ui.define([
         _getText: function (sKey) {
             return this.getOwnerComponent().getModel("i18n").getResourceBundle().getText(sKey);
         },
-        _applicaFiltri: function () {
+        _caricaDati: function () {
+            var oViewModel = this.getView().getModel("viewModel");
+            var oModel = this.getOwnerComponent().getModel();
+            oViewModel.setProperty("/busy", true);
+            oModel.read("/Budget_DG", {
+                success: function () {
+                    oViewModel.setProperty("/busy", false);
+                    this._applicaFiltriLocali();
+                }.bind(this),
+                error: function (oError) {
+                    oViewModel.setProperty("/busy", false);
+                    var sMsg = this._getText("msgErroreCaricamento");
+                    try {
+                        var oResp = JSON.parse(oError.responseText);
+                        if (oResp.error && oResp.error.message && oResp.error.message.value) {
+                            sMsg = oResp.error.message.value;
+                        }
+                    } catch (e) { }
+                    MessageBox.error(sMsg);
+                }.bind(this)
+            });
+        },
+        _applicaFiltriLocali: function () {
             var oViewModel = this.getView().getModel("viewModel");
             var sEsercizio = oViewModel.getProperty("/filtroEsercizio");
             var sCdCDG = (oViewModel.getProperty("/filtroCdCDG") || "").trim();
             var aFiltri = [];
             if (sEsercizio) {
-                aFiltri.push(new Filter("Gjahr", FilterOperator.EQ, sEsercizio));
+                aFiltri.push(new Filter("ESERCIZIO", FilterOperator.EQ, sEsercizio));
             }
             if (sCdCDG !== "") {
-                aFiltri.push(new Filter("KostlDg", FilterOperator.Contains, sCdCDG));
+                aFiltri.push(new Filter("CENTRO_DI_COSTO_DG", FilterOperator.Contains, sCdCDG));
             }
             var oBinding = this.byId("tblBudgetDG").getBinding("items");
             if (oBinding) {
@@ -61,14 +84,14 @@ sap.ui.define([
             }
         },
         onFiltroChange: function () {
-            this._applicaFiltri();
+            this._applicaFiltriLocali();
         },
         onResetFiltri: function () {
             var iAnnoCorrente = new Date().getFullYear();
             var oViewModel = this.getView().getModel("viewModel");
             oViewModel.setProperty("/filtroEsercizio", iAnnoCorrente.toString());
             oViewModel.setProperty("/filtroCdCDG", "");
-            this._applicaFiltri();
+            this._applicaFiltriLocali();
         },
         onSearchBudgetDG: function (oEvent) {
             var sQuery = (oEvent.getParameter("query") || "").trim();
@@ -76,8 +99,8 @@ sap.ui.define([
             if (sQuery !== "") {
                 aFiltri.push(new Filter({
                     filters: [
-                        new Filter("KostlDg", FilterOperator.Contains, sQuery),
-                        new Filter("Gjahr", FilterOperator.Contains, sQuery)
+                        new Filter("CENTRO_DI_COSTO_DG", FilterOperator.Contains, sQuery),
+                        new Filter("ESERCIZIO", FilterOperator.Contains, sQuery)
                     ],
                     and: false
                 }));
@@ -90,28 +113,14 @@ sap.ui.define([
         onApriDettaglio: function (oEvent) {
             var oCtx = oEvent.getSource().getBindingContext();
             this.getOwnerComponent().getRouter().navTo("RouteDettaglio", {
-                Gjahr: oCtx.getProperty("Gjahr"),
-                KostlDg: encodeURIComponent(oCtx.getProperty("KostlDg"))
-            });
-        },
-        onSelezionaBudgetDG: function (oEvent) {
-            var oItem = oEvent.getParameter("listItem");
-            if (!oItem) {
-                return;
-            }
-            var oCtx = oItem.getBindingContext();
-            this.getOwnerComponent().getRouter().navTo("RouteDettaglio", {
-                Gjahr: oCtx.getProperty("Gjahr"),
-                KostlDg: encodeURIComponent(oCtx.getProperty("KostlDg"))
+                Gjahr: oCtx.getProperty("ESERCIZIO"),
+                KostlDg: encodeURIComponent(oCtx.getProperty("CENTRO_DI_COSTO_DG"))
             });
         },
         onCreaBudgetDG: function () {
             MessageBox.information(this._getText("msgFunzioneStep2"));
         },
         onCopiaEsercizio: function () {
-            MessageBox.information(this._getText("msgFunzioneStep2"));
-        },
-        onValueHelpCdCDG: function () {
             MessageBox.information(this._getText("msgFunzioneStep2"));
         }
     });

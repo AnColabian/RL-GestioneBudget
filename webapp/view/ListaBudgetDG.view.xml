@@ -21,14 +21,14 @@
                 <f:content>
                     <l:HorizontalLayout allowWrapping="true">
                         <l:content>
-                            <HBox class="sapUiSmallMarginEnd">
+                            <HBox>
                                 <VBox class="sapUiSmallMarginEnd">
                                     <Label text="{i18n>lblEsercizio}" labelFor="selEsercizio"/>
                                     <Select id="selEsercizio" selectedKey="{viewModel>/filtroEsercizio}" change=".onFiltroChange"/>
                                 </VBox>
                                 <VBox class="sapUiSmallMarginEnd">
                                     <Label text="{i18n>lblCdCDG}" labelFor="inpFiltroCdCDG"/>
-                                    <Input id="inpFiltroCdCDG" value="{viewModel>/filtroCdCDG}" placeholder="{i18n>phCdCDG}" showValueHelp="true" valueHelpRequest=".onValueHelpCdCDG" submit=".onFiltroChange"/>
+                                    <Input id="inpFiltroCdCDG" value="{viewModel>/filtroCdCDG}" placeholder="{i18n>phCdCDG}" submit=".onFiltroChange"/>
                                 </VBox>
                                 <VBox class="sapUiSmallMarginEnd" justifyContent="End">
                                     <HBox class="sapUiSmallMarginTop">
@@ -43,7 +43,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <Table id="tblBudgetDG" items="{path: '/BudgetDGSet', sorter: {path: 'Gjahr', descending: true}}" noDataText="{i18n>noDataBudgetDG}" busyIndicatorDelay="0" growing="true" growingThreshold="20" mode="SingleSelectMaster" selectionChange=".onSelezionaBudgetDG">
+            <Table id="tblBudgetDG" items="{path: '/Budget_DG', sorter: {path: 'ESERCIZIO', descending: true}}" noDataText="{i18n>noDataBudgetDG}" busyIndicatorDelay="0" growing="false">
                 <headerToolbar>
                     <Toolbar>
                         <Title id="tblBudgetDGTitle" text="{i18n>titleTabellaBudgetDG}"/>
@@ -64,12 +64,6 @@
                     <Column hAlign="End">
                         <Text text="{i18n>colImportoDistribuito}"/>
                     </Column>
-                    <Column hAlign="End">
-                        <Text text="{i18n>colResiduoDG}"/>
-                    </Column>
-                    <Column hAlign="Center">
-                        <Text text="{i18n>colStatoResiduo}"/>
-                    </Column>
                     <Column>
                         <Text text="{i18n>colDataAssegnazione}"/>
                     </Column>
@@ -80,14 +74,12 @@
                 <items>
                     <ColumnListItem type="Navigation" press=".onApriDettaglio">
                         <cells>
-                            <Text text="{Gjahr}"/>
-                            <Text text="{KostlDg}"/>
-                            <ObjectNumber number="{parts: [{path: 'WrbtrAssegnato'}, {path: 'Waers'}], formatter: '.formatter.formatImporto'}" textAlign="End"/>
-                            <ObjectNumber number="{parts: [{path: 'WrbtrDistribuito'}, {path: 'Waers'}], formatter: '.formatter.formatImporto'}" textAlign="End"/>
-                            <ObjectNumber number="{parts: [{path: 'WrbtrResiduo'}, {path: 'Waers'}], formatter: '.formatter.formatImporto'}" state="{path: 'WrbtrResiduo', formatter: '.formatter.formatStatoResiduo'}" textAlign="End"/>
-                            <ObjectStatus text="{path: 'WrbtrResiduo', formatter: '.formatter.formatLabelStatoResiduo'}" state="{path: 'WrbtrResiduo', formatter: '.formatter.formatStatoResiduo'}" inverted="false"/>
-                            <Text text="{parts: [{path: 'DatumAssegnazione'}], formatter: '.formatter.formatData'}"/>
-                            <Text text="{XubnameAssegnazione}"/>
+                            <Text text="{ESERCIZIO}"/>
+                            <Text text="{CENTRO_DI_COSTO_DG}"/>
+                            <ObjectNumber number="{path: 'IMPORTO_ASSEGNATO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
+                            <ObjectNumber number="{path: 'IMPORTO_DISTRIBUITO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
+                            <Text text="{DATA_ASSEGNAZIONE}"/>
+                            <Text text="{UTENTE_ASSEGNAZIONE}"/>
                         </cells>
                     </ColumnListItem>
                 </items>

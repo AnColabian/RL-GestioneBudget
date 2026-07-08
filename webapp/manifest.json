@@ -15,6 +15,16 @@
       "version": "1.27.0",
       "toolsId": "c2aeb282-3092-42ba-95ab-3ee94995fcc2"
     },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "metadata/metadata ASSEGNA_BUDGET.xml"
+        }
+      }
+    },
     "crossNavigation": {
       "inbounds": {
         "rlbudget-display": {
@@ -51,7 +61,10 @@
       "minUI5Version": "1.149.1",
       "libs": {
         "sap.m": {},
-        "sap.ui.core": {}
+        "sap.ui.core": {},
+        "sap.ui.layout": {},
+        "sap.ui.unified": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -59,10 +72,23 @@
       "cozy": true
     },
     "models": {
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "useBatch": false,
+          "refreshAfterChange": false
+        }
+      },
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "rlbudget.i18n.i18n"
+          "bundleName": "rlbudget.i18n.i18n",
+          "supportedLocales": [
+            "it",
+            ""
+          ],
+          "fallbackLocale": "it"
         }
       }
     },

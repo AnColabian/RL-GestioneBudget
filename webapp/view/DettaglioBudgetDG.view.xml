@@ -1,0 +1,108 @@
+<mvc:View controllerName="rlbudget.controller.DettaglioBudgetDG"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form" displayBlock="true">
+    <f:DynamicPage id="pageDettaglio" toggleHeaderOnTitleClick="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:navigationActions>
+                    <Button icon="sap-icon://nav-back" press=".onNavBack" tooltip="{i18n>btnIndietro}"/>
+                </f:navigationActions>
+                <f:heading>
+                    <Title text="{i18n>titleDettaglioBudgetDG}"/>
+                </f:heading>
+                <f:snappedContent>
+                    <Text text="{viewModel>/snappedTitle}"/>
+                </f:snappedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" columnsXL="2" columnsL="2" columnsM="1">
+                        <form:content>
+                            <core:Title text="{i18n>titleSezioneTestata}"/>
+                            <Label text="{i18n>lblEsercizio}"/>
+                            <Text text="{viewModel>/ESERCIZIO}"/>
+                            <Label text="{i18n>lblCdCDG}"/>
+                            <Text text="{viewModel>/CENTRO_DI_COSTO_DG}"/>
+                            <Label text="{i18n>lblImportoAssegnato}"/>
+                            <ObjectNumber number="{path: 'viewModel>/IMPORTO_ASSEGNATO', formatter: '.formatter.formatImporto'}" emphasized="true"/>
+                            <Label text="{i18n>lblImportoDistribuito}"/>
+                            <ObjectNumber number="{path: 'viewModel>/IMPORTO_DISTRIBUITO', formatter: '.formatter.formatImporto'}"/>
+                            <Label text="{i18n>lblResiduoDG}"/>
+                            <Label text="{i18n>lblResiduoDG}"/>
+                            <ObjectNumber number="{path: 'viewModel>/IMPORTO_RESIDUO', formatter: '.formatter.formatImporto'}" state="{parts: [{path: 'viewModel>/IMPORTO_RESIDUO'}, {path: 'viewModel>/IMPORTO_ASSEGNATO'}], formatter: '.formatter.formatStatoResiduoPercentuale'}"/>
+                            <core:Title text="{i18n>titleSezioneAudit}"/>
+                            <Label text="{i18n>lblDataAssegnazione}"/>
+                            <Text text="{viewModel>/DATA_ASSEGNAZIONE}"/>
+                            <Label text="{i18n>lblUtenteAssegnazione}"/>
+                            <Text text="{viewModel>/UTENTE_ASSEGNAZIONE}"/>
+                            <Label text="{i18n>lblDataModifica}"/>
+                            <Text text="{viewModel>/DATA_MODIFICA}"/>
+                            <Label text="{i18n>lblUtenteModifica}"/>
+                            <Text text="{viewModel>/UTENTE_MODIFICA}"/>
+                        </form:content>
+                    </form:SimpleForm>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table id="tblBudgetUO" items="{path: 'viewModel>/budgetUO'}" noDataText="{i18n>noDataUO}" busyIndicatorDelay="0" growing="false">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title id="tblBudgetUOTitle" text="{i18n>titleTabellaUO}"/>
+                        <ToolbarSpacer/>
+                        <Button id="btnAggiungiUO" text="{i18n>btnAggiungiUO}" type="Emphasized" icon="sap-icon://add" enabled="{viewModel>/writeEnabled}" press=".onAggiungiUO"/>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="{i18n>colCdCUO}"/>
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="{i18n>colImportoAssegnato}"/>
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="{i18n>colImportoConsumato}"/>
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="{i18n>colResiduoUO}"/>
+                    </Column>
+                    <Column hAlign="Center">
+                        <Text text="{i18n>colStatoResiduo}"/>
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>colDataAssegnazione}"/>
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>colUtenteAssegnazione}"/>
+                    </Column>
+                    <Column hAlign="Center">
+                        <Text text="{i18n>colAzioni}"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Inactive">
+                        <cells>
+                            <Text text="{viewModel>CENTRO_DI_COSTO_UO}"/>
+                            <ObjectNumber number="{path: 'viewModel>IMPORTO_ASSEGNATO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
+                            <ObjectNumber number="{path: 'viewModel>IMPORTO_CONSUMATO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
+                            <ObjectNumber number="{path: 'viewModel>IMPORTO_RESIDUO', formatter: '.formatter.formatImporto'}" state="{path: 'viewModel>IMPORTO_RESIDUO', formatter: '.formatter.formatStatoResiduo'}" textAlign="End"/>
+                            <ObjectStatus text="{path: 'viewModel>IMPORTO_RESIDUO', formatter: '.formatter.formatLabelStatoResiduo'}" state="{path: 'viewModel>IMPORTO_RESIDUO', formatter: '.formatter.formatStatoResiduo'}"/>
+                            <Text text="{viewModel>DATA_ASSEGNAZIONE}"/>
+                            <Text text="{viewModel>UTENTE_ASSEGNAZIONE}"/>
+                            <HBox justifyContent="Center">
+                                <Button icon="sap-icon://edit" type="Transparent" enabled="{viewModel>/writeEnabled}" tooltip="{i18n>btnModifica}" press=".onModificaUO" customData:value="{viewModel>CENTRO_DI_COSTO_UO}"
+                                    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"/>
+                            </HBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

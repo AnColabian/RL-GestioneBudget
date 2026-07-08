@@ -1,9 +1,9 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
+    "sap/ui/core/message/MessageManager",
     "rlbudget/model/models"
-], (UIComponent, models) => {
+], function (UIComponent, MessageManager, models) {
     "use strict";
-
     return UIComponent.extend("rlbudget.Component", {
         metadata: {
             manifest: "json",
@@ -11,16 +11,17 @@ sap.ui.define([
                 "sap.ui.core.IAsyncContentCreation"
             ]
         },
-
-        init() {
-            // call the base component's init function
+        init: function () {
             UIComponent.prototype.init.apply(this, arguments);
-
-            // set the device model
             this.setModel(models.createDeviceModel(), "device");
-
-            // enable routing
+            var oMessageManager = MessageManager;
+            this.setModel(oMessageManager.getMessageModel(), "message");
+            oMessageManager.registerObject(this.getRootControl(), true);
             this.getRouter().initialize();
+        },
+        destroy: function () {
+            MessageManager.unregisterObject(this.getRootControl());
+            UIComponent.prototype.destroy.apply(this, arguments);
         }
     });
 });
