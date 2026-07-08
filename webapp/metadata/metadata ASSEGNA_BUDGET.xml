@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZMM_ASSEGNAZIONE_BUDGET_SRV" xml:lang="it" sap:schema-version="1"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="Budget_DG" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ESERCIZIO"/>
+                    <PropertyRef Name="CENTRO_DI_COSTO_DG"/>
+                </Key>
+                <Property Name="ESERCIZIO" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Esercizio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CENTRO_DI_COSTO_DG" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="CdC" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IMPORTO_ASSEGNATO" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="Importo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IMPORTO_DISTRIBUITO" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="Importo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DATA_ASSEGNAZIONE" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UTENTE_ASSEGNAZIONE" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UTENTE_MODIFICA" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DATA_MODIFICA" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Budget_UO" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ESERCIZIO"/>
+                    <PropertyRef Name="CENTRO_DI_COSTO_UO"/>
+                </Key>
+                <Property Name="ESERCIZIO" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Esercizio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CENTRO_DI_COSTO_UO" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="CdC" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CENTRO_DI_COSTO_DG" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="CdC" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IMPORTO_ASSEGNATO" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="Importo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IMPORTO_CONSUMATO" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="Importo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DATA_ASSEGNAZIONE" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UTENTE_ASSEGNAZIONE" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UTENTE_MODIFICA" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DATA_MODIFICA" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZMM_ASSEGNAZIONE_BUDGET_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Budget_DG" EntityType="ZMM_ASSEGNAZIONE_BUDGET_SRV.Budget_DG" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Budget_UO" EntityType="ZMM_ASSEGNAZIONE_BUDGET_SRV.Budget_UO" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="https://vhazig4dci.sap.ariaspa.local:44300/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://vhazig4dci.sap.ariaspa.local:44300/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

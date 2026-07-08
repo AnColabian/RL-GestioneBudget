@@ -1,0 +1,97 @@
+<mvc:View controllerName="rlbudget.controller.ListaBudgetDG"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout" displayBlock="true">
+    <f:DynamicPage id="pageListaBudget" toggleHeaderOnTitleClick="false">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>titleListaBudget}"/>
+                </f:heading>
+                <f:actions>
+                    <Button id="btnCreaBudgetDG" text="{i18n>btnCreaBudgetDG}" type="Emphasized" icon="sap-icon://add" press=".onCreaBudgetDG"/>
+                    <Button id="btnCopiaEsercizio" text="{i18n>btnCopiaEsercizio}" icon="sap-icon://copy" press=".onCopiaEsercizio"/>
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <l:HorizontalLayout allowWrapping="true">
+                        <l:content>
+                            <HBox class="sapUiSmallMarginEnd">
+                                <VBox class="sapUiSmallMarginEnd">
+                                    <Label text="{i18n>lblEsercizio}" labelFor="selEsercizio"/>
+                                    <Select id="selEsercizio" selectedKey="{viewModel>/filtroEsercizio}" change=".onFiltroChange"/>
+                                </VBox>
+                                <VBox class="sapUiSmallMarginEnd">
+                                    <Label text="{i18n>lblCdCDG}" labelFor="inpFiltroCdCDG"/>
+                                    <Input id="inpFiltroCdCDG" value="{viewModel>/filtroCdCDG}" placeholder="{i18n>phCdCDG}" showValueHelp="true" valueHelpRequest=".onValueHelpCdCDG" submit=".onFiltroChange"/>
+                                </VBox>
+                                <VBox class="sapUiSmallMarginEnd" justifyContent="End">
+                                    <HBox class="sapUiSmallMarginTop">
+                                        <Button text="{i18n>btnCerca}" type="Emphasized" press=".onFiltroChange" class="sapUiSmallMarginEnd"/>
+                                        <Button text="{i18n>btnReset}" press=".onResetFiltri"/>
+                                    </HBox>
+                                </VBox>
+                            </HBox>
+                        </l:content>
+                    </l:HorizontalLayout>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table id="tblBudgetDG" items="{path: '/BudgetDGSet', sorter: {path: 'Gjahr', descending: true}}" noDataText="{i18n>noDataBudgetDG}" busyIndicatorDelay="0" growing="true" growingThreshold="20" mode="SingleSelectMaster" selectionChange=".onSelezionaBudgetDG">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title id="tblBudgetDGTitle" text="{i18n>titleTabellaBudgetDG}"/>
+                        <ToolbarSpacer/>
+                        <SearchField id="sfBudgetDG" width="20rem" search=".onSearchBudgetDG" placeholder="{i18n>phSearchBudgetDG}"/>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="{i18n>colEsercizio}"/>
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>colCdCDG}"/>
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="{i18n>colImportoAssegnato}"/>
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="{i18n>colImportoDistribuito}"/>
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="{i18n>colResiduoDG}"/>
+                    </Column>
+                    <Column hAlign="Center">
+                        <Text text="{i18n>colStatoResiduo}"/>
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>colDataAssegnazione}"/>
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>colUtenteAssegnazione}"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation" press=".onApriDettaglio">
+                        <cells>
+                            <Text text="{Gjahr}"/>
+                            <Text text="{KostlDg}"/>
+                            <ObjectNumber number="{parts: [{path: 'WrbtrAssegnato'}, {path: 'Waers'}], formatter: '.formatter.formatImporto'}" textAlign="End"/>
+                            <ObjectNumber number="{parts: [{path: 'WrbtrDistribuito'}, {path: 'Waers'}], formatter: '.formatter.formatImporto'}" textAlign="End"/>
+                            <ObjectNumber number="{parts: [{path: 'WrbtrResiduo'}, {path: 'Waers'}], formatter: '.formatter.formatImporto'}" state="{path: 'WrbtrResiduo', formatter: '.formatter.formatStatoResiduo'}" textAlign="End"/>
+                            <ObjectStatus text="{path: 'WrbtrResiduo', formatter: '.formatter.formatLabelStatoResiduo'}" state="{path: 'WrbtrResiduo', formatter: '.formatter.formatStatoResiduo'}" inverted="false"/>
+                            <Text text="{parts: [{path: 'DatumAssegnazione'}], formatter: '.formatter.formatData'}"/>
+                            <Text text="{XubnameAssegnazione}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

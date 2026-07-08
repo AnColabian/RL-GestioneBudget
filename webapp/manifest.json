@@ -46,7 +46,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.149.1",
       "libs": {
@@ -87,17 +87,28 @@
       },
       "routes": [
         {
-          "name": "RouteView1",
-          "pattern": ":?query:",
+          "name": "RouteLista",
+          "pattern": "",
           "target": [
-            "TargetView1"
+            "TargetListaBudgetDG"
+          ]
+        },
+        {
+          "name": "RouteDettaglio",
+          "pattern": "dettaglio/{Gjahr}/{KostlDg}",
+          "target": [
+            "TargetDettaglioBudgetDG"
           ]
         }
       ],
       "targets": {
-        "TargetView1": {
-          "id": "View1",
-          "name": "View1"
+        "TargetListaBudgetDG": {
+          "id": "ListaBudgetDG",
+          "name": "ListaBudgetDG"
+        },
+        "TargetDettaglioBudgetDG": {
+          "id": "DettaglioBudgetDG",
+          "name": "DettaglioBudgetDG"
         }
       }
     },
