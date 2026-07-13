@@ -43,7 +43,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <Table id="tblBudgetDG" items="{path: '/Budget_DG', sorter: {path: 'ESERCIZIO', descending: true}}" noDataText="{i18n>noDataBudgetDG}" busyIndicatorDelay="0" growing="false">
+            <Table id="tblBudgetDG" items="{viewModel>/budgetDGFiltrati}" noDataText="{i18n>noDataBudgetDG}" busyIndicatorDelay="0" growing="false">
                 <headerToolbar>
                     <Toolbar>
                         <Title id="tblBudgetDGTitle" text="{i18n>titleTabellaBudgetDG}"/>
@@ -80,14 +80,14 @@
                 <items>
                     <ColumnListItem type="Navigation" press=".onApriDettaglio">
                         <cells>
-                            <Text text="{ESERCIZIO}"/>
-                            <Text text="{CENTRO_DI_COSTO_DG}"/>
-                            <ObjectNumber number="{path: 'IMPORTO_ASSEGNATO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
-                            <ObjectNumber number="{path: 'IMPORTO_DISTRIBUITO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
-                            <ObjectNumber number="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatResiduoDG'}" state="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatStatoResiduoDG'}" textAlign="End"/>
-                            <ObjectStatus text="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatLabelStatoResiduoDG'}" state="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatStatoResiduoDG'}"/>
-                            <Text text="{path: 'DATA_ASSEGNAZIONE', formatter: '.formatter.formatData'}"/>
-                            <Text text="{UTENTE_ASSEGNAZIONE}"/>
+                            <Text text="{viewModel>ESERCIZIO}"/>
+                            <Text text="{viewModel>CENTRO_DI_COSTO_DG}"/>
+                            <ObjectNumber number="{path: 'viewModel>IMPORTO_ASSEGNATO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
+                            <ObjectNumber number="{path: 'viewModel>IMPORTO_DISTRIBUITO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
+                            <ObjectNumber number="{parts: [{path: 'viewModel>IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatResiduoDG'}" state="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatStatoResiduoDG'}" textAlign="End"/>
+                            <ObjectStatus text="{parts: [{path: 'viewModel>IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatLabelStatoResiduoDG'}" state="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatStatoResiduoDG'}"/>
+                            <Text text="{path: 'viewModel>DATA_ASSEGNAZIONE', formatter: '.formatter.formatData'}"/>
+                            <Text text="{viewModel>UTENTE_ASSEGNAZIONE}"/>
                         </cells>
                     </ColumnListItem>
                 </items>

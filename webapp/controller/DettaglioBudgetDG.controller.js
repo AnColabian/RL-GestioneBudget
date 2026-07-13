@@ -239,7 +239,7 @@ sap.ui.define([
                 ESERCIZIO: oDialogUO.ESERCIZIO,
                 CENTRO_DI_COSTO_DG: oDialogUO.CENTRO_DI_COSTO_DG,
                 CENTRO_DI_COSTO_UO: oDialogUO.CENTRO_DI_COSTO_UO.trim(),
-                IMPORTO_ASSEGNATO: parseFloat(oDialogUO.IMPORTO_ASSEGNATO)
+                IMPORTO_ASSEGNATO: parseFloat(oDialogUO.IMPORTO_ASSEGNATO.replace(",", ".")).toFixed(2)
             };
             oModel.create("/Budget_UO", oPayload, {
                 success: function () {
