@@ -232,10 +232,26 @@ sap.ui.define([
             oViewModel.setProperty("/dialogUO/ImportoValueStateText", "");
         },
         onSalvaUO: function () {
-            if (!this._validaDialogUO()) {
-                return;
-            }
-            MessageBox.information(this._getText("msgFunzioneStep2"));
+            if (!this._validaDialogUO()) { return; }
+            var oModel = this.getOwnerComponent().getModel();
+            var oDialogUO = this.getView().getModel("viewModel").getProperty("/dialogUO");
+            var oPayload = {
+                ESERCIZIO: oDialogUO.ESERCIZIO,
+                CENTRO_DI_COSTO_DG: oDialogUO.CENTRO_DI_COSTO_DG,
+                CENTRO_DI_COSTO_UO: oDialogUO.CENTRO_DI_COSTO_UO.trim(),
+                IMPORTO_ASSEGNATO: parseFloat(oDialogUO.IMPORTO_ASSEGNATO)
+            };
+            oModel.create("/Budget_UO", oPayload, {
+                success: function () {
+                    if (this._oDialogUO) { this._oDialogUO.close(); }
+                    MessageBox.success(this._getText("msgSalvataggioOk"), {
+                        onClose: function () {
+                            this._caricaDatiUO(this._sEsercizio, this._sKostlDg);
+                        }.bind(this)
+                    });
+                }.bind(this),
+                error: function (oError) { this._gestisciErrore(oError); }.bind(this)
+            });
         },
         onAnnullaUO: function () {
             if (this._oDialogUO) {

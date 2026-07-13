@@ -52,22 +52,28 @@
                     </Toolbar>
                 </headerToolbar>
                 <columns>
-                    <Column>
+                    <Column minScreenWidth="Small" demandPopin="false">
                         <Text text="{i18n>colEsercizio}"/>
                     </Column>
-                    <Column>
+                    <Column minScreenWidth="Small" demandPopin="false">
                         <Text text="{i18n>colCdCDG}"/>
                     </Column>
-                    <Column hAlign="End">
+                    <Column hAlign="End" minScreenWidth="Tablet" demandPopin="true">
                         <Text text="{i18n>colImportoAssegnato}"/>
                     </Column>
-                    <Column hAlign="End">
+                    <Column hAlign="End" minScreenWidth="Tablet" demandPopin="true">
                         <Text text="{i18n>colImportoDistribuito}"/>
                     </Column>
-                    <Column>
+                    <Column hAlign="End" minScreenWidth="Small" demandPopin="false">
+                        <Text text="{i18n>colResiduoDG}"/>
+                    </Column>
+                    <Column hAlign="Center" minScreenWidth="Small" demandPopin="false">
+                        <Text text="{i18n>colStatoResiduo}"/>
+                    </Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true">
                         <Text text="{i18n>colDataAssegnazione}"/>
                     </Column>
-                    <Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true">
                         <Text text="{i18n>colUtenteAssegnazione}"/>
                     </Column>
                 </columns>
@@ -78,7 +84,9 @@
                             <Text text="{CENTRO_DI_COSTO_DG}"/>
                             <ObjectNumber number="{path: 'IMPORTO_ASSEGNATO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
                             <ObjectNumber number="{path: 'IMPORTO_DISTRIBUITO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
-                            <Text text="{DATA_ASSEGNAZIONE}"/>
+                            <ObjectNumber number="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatResiduoDG'}" state="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatStatoResiduoDG'}" textAlign="End"/>
+                            <ObjectStatus text="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatLabelStatoResiduoDG'}" state="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatStatoResiduoDG'}"/>
+                            <Text text="{path: 'DATA_ASSEGNAZIONE', formatter: '.formatter.formatData'}"/>
                             <Text text="{UTENTE_ASSEGNAZIONE}"/>
                         </cells>
                     </ColumnListItem>

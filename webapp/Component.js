@@ -14,13 +14,10 @@ sap.ui.define([
         init: function () {
             UIComponent.prototype.init.apply(this, arguments);
             this.setModel(models.createDeviceModel(), "device");
-            var oMessageManager = MessageManager;
-            this.setModel(oMessageManager.getMessageModel(), "message");
-            oMessageManager.registerObject(this.getRootControl(), true);
+            this.setModel(sap.ui.getCore().getMessageManager().getMessageModel(), "message");
             this.getRouter().initialize();
         },
         destroy: function () {
-            MessageManager.unregisterObject(this.getRootControl());
             UIComponent.prototype.destroy.apply(this, arguments);
         }
     });

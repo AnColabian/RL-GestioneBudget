@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+    <Dialog id="dialogCopiaEsercizio" title="{i18n>titleDialogCopiaEsercizio}" contentWidth="32rem" draggable="true" resizable="false">
+        <content>
+            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="12" columnsXL="1" columnsL="1" columnsM="1" class="sapUiSmallMargin">
+                <form:content>
+                    <Label text="{i18n>lblEsercizioDa}" required="true"/>
+                    <Select id="selCopiaEsercizioDa" selectedKey="{viewModel>/dialogCopia/esercizioDa}" valueState="{viewModel>/dialogCopia/EsercizioDaValueState}" valueStateText="{viewModel>/dialogCopia/EsercizioDaValueStateText}" change=".onCopiaEsercizioDaChange"/>
+                    <Label text="{i18n>lblEsercizioA}" required="true"/>
+                    <Input id="inpCopiaEsercizioA" value="{viewModel>/dialogCopia/esercizioA}" maxLength="4" placeholder="{i18n>phEsercizio}" valueState="{viewModel>/dialogCopia/EsercizioAValueState}" valueStateText="{viewModel>/dialogCopia/EsercizioAValueStateText}" liveChange=".onCopiaEsercizioALiveChange"/>
+                    <Label text="{i18n>lblAzzeraImporti}"/>
+                    <CheckBox id="cbkAzzeraImporti" text="{i18n>lblAzzeraImportiDesc}" selected="{viewModel>/dialogCopia/azzeraImporti}"/>
+                </form:content>
+            </form:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="{i18n>btnCopia}" type="Emphasized" press=".onConfermaCopiaEsercizio"/>
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>btnAnnulla}" press=".onAnnullaCopiaEsercizio"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
