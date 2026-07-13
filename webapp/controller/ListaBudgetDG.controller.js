@@ -230,7 +230,7 @@ sap.ui.define([
             if (!this._oDialogCrea) {
                 Fragment.load({
                     id: this.getView().getId(),
-                    name: "rlbudget.fragment.CreaBudgetDG",
+                    name: "rlbudget.view.fragment.CreaBudgetDG",
                     controller: this
                 }).then(function (oDialog) {
                     this._oDialogCrea = oDialog;

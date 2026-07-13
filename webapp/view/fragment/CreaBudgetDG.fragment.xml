@@ -1,16 +1,16 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:form="sap.ui.layout.form">
-    <Dialog id="dialogCreaBudgetDG" title="{i18n>titleDialogCreaBudgetDG}" contentWidth="36rem" draggable="true" resizable="false">
+    <Dialog id="dialogCreaBudgetDG" title="{i18n>titleDialogCreaBudgetDG}" contentWidth="32rem" resizable="false" stretch="false">
         <content>
-            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="12" columnsXL="1" columnsL="1" columnsM="1" class="sapUiSmallMargin">
+            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="12" columnsXL="1" columnsL="1" columnsM="1" class="sapUiNoMarginBegin sapUiNoMarginEnd sapUiSmallMarginTopBottom">
                 <form:content>
                     <Label text="{i18n>lblEsercizio}" required="true"/>
-                    <Input id="inpCreaBudgetEsercizio" value="{viewModel>/dialogCrea/ESERCIZIO}" maxLength="4" placeholder="{i18n>phEsercizio}" valueState="{viewModel>/dialogCrea/EsercizioValueState}" valueStateText="{viewModel>/dialogCrea/EsercizioValueStateText}" liveChange=".onCreaBudgetEsercizioLiveChange"/>
+                    <Input width="30rem" id="inpCreaBudgetEsercizio" value="{viewModel>/dialogCrea/ESERCIZIO}" maxLength="4" placeholder="{i18n>phEsercizio}" valueState="{viewModel>/dialogCrea/EsercizioValueState}" valueStateText="{viewModel>/dialogCrea/EsercizioValueStateText}" liveChange=".onCreaBudgetEsercizioLiveChange"/>
                     <Label text="{i18n>lblCdCDG}" required="true"/>
-                    <Input id="inpCreaBudgetCdCDG" value="{viewModel>/dialogCrea/CENTRO_DI_COSTO_DG}" maxLength="10" placeholder="{i18n>phCdCDG}" valueState="{viewModel>/dialogCrea/CdCDGValueState}" valueStateText="{viewModel>/dialogCrea/CdCDGValueStateText}" liveChange=".onCreaBudgetCdCLiveChange"/>
+                    <Input width="30rem" id="inpCreaBudgetCdCDG" value="{viewModel>/dialogCrea/CENTRO_DI_COSTO_DG}" maxLength="10" placeholder="{i18n>phCdCDG}" valueState="{viewModel>/dialogCrea/CdCDGValueState}" valueStateText="{viewModel>/dialogCrea/CdCDGValueStateText}" liveChange=".onCreaBudgetCdCLiveChange"/>
                     <Label text="{i18n>lblImportoAssegnato}" required="true"/>
-                    <Input id="inpCreaBudgetImporto" value="{viewModel>/dialogCrea/IMPORTO_ASSEGNATO}" maxLength="23" textAlign="End" placeholder="{i18n>phImporto}" valueState="{viewModel>/dialogCrea/ImportoValueState}" valueStateText="{viewModel>/dialogCrea/ImportoValueStateText}" liveChange=".onCreaBudgetImportoLiveChange"/>
+                    <Input width="30rem" id="inpCreaBudgetImporto" value="{viewModel>/dialogCrea/IMPORTO_ASSEGNATO}" maxLength="23" textAlign="End" placeholder="{i18n>phImporto}" valueState="{viewModel>/dialogCrea/ImportoValueState}" valueStateText="{viewModel>/dialogCrea/ImportoValueStateText}" liveChange=".onCreaBudgetImportoLiveChange"/>
                 </form:content>
             </form:SimpleForm>
         </content>
