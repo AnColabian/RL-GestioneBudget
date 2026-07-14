@@ -14,6 +14,9 @@
                 <f:heading>
                     <Title text="{i18n>titleDettaglioBudgetDG}"/>
                 </f:heading>
+                <f:actions>
+                    <Button text="{i18n>btnModificaBudgetDG}" icon="sap-icon://edit" press=".onModificaBudgetDG" enabled="{viewModel>/writeEnabled}"/>
+                </f:actions>
                 <f:snappedContent>
                     <Text text="{viewModel>/snappedTitle}"/>
                 </f:snappedContent>
@@ -34,15 +37,14 @@
                             <Label text="{i18n>lblImportoDistribuito}"/>
                             <ObjectNumber number="{path: 'viewModel>/IMPORTO_DISTRIBUITO', formatter: '.formatter.formatImporto'}"/>
                             <Label text="{i18n>lblResiduoDG}"/>
-                            <Label text="{i18n>lblResiduoDG}"/>
                             <ObjectNumber number="{path: 'viewModel>/IMPORTO_RESIDUO', formatter: '.formatter.formatImporto'}" state="{parts: [{path: 'viewModel>/IMPORTO_RESIDUO'}, {path: 'viewModel>/IMPORTO_ASSEGNATO'}], formatter: '.formatter.formatStatoResiduoPercentuale'}"/>
                             <core:Title text="{i18n>titleSezioneAudit}"/>
                             <Label text="{i18n>lblDataAssegnazione}"/>
-                            <Text text="{viewModel>/DATA_ASSEGNAZIONE}"/>
+                            <Text text="{path: 'viewModel>/DATA_ASSEGNAZIONE', formatter: '.formatter.formatData'}"/>
                             <Label text="{i18n>lblUtenteAssegnazione}"/>
                             <Text text="{viewModel>/UTENTE_ASSEGNAZIONE}"/>
                             <Label text="{i18n>lblDataModifica}"/>
-                            <Text text="{viewModel>/DATA_MODIFICA}"/>
+                            <Text text="{path: 'viewModel>/DATA_MODIFICA', formatter: '.formatter.formatData'}"/>
                             <Label text="{i18n>lblUtenteModifica}"/>
                             <Text text="{viewModel>/UTENTE_MODIFICA}"/>
                         </form:content>

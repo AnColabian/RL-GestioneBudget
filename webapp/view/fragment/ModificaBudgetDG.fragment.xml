@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+    <Dialog id="dialogModificaBudgetDG" title="{i18n>titleDialogModificaBudgetDG}" contentWidth="32rem" resizable="false" stretch="false">
+        <content>
+            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="12" columnsXL="1" columnsL="1" columnsM="1" class="sapUiNoMarginBegin sapUiNoMarginEnd sapUiSmallMarginTopBottom">
+                <form:content>
+                    <Label text="{i18n>lblEsercizio}"/>
+                    <Text text="{viewModel>/dialogModifica/ESERCIZIO}"/>
+                    <Label text="{i18n>lblCdCDG}"/>
+                    <Text text="{viewModel>/dialogModifica/CENTRO_DI_COSTO_DG}"/>
+                    <Label text="{i18n>lblImportoAssegnato}" required="true"/>
+                    <Input width="30rem" id="inpModificaImporto" value="{viewModel>/dialogModifica/IMPORTO_ASSEGNATO}" maxLength="23" textAlign="End" placeholder="{i18n>phImporto}" valueState="{viewModel>/dialogModifica/ImportoValueState}" valueStateText="{viewModel>/dialogModifica/ImportoValueStateText}" liveChange=".onModificaImportoLiveChange"/>
+                </form:content>
+            </form:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="{i18n>btnSalva}" type="Emphasized" press=".onSalvaModificaBudgetDG"/>
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>btnAnnulla}" press=".onAnnullaModificaBudgetDG"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

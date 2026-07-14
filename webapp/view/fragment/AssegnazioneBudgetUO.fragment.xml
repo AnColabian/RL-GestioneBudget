@@ -1,31 +1,18 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
-    xmlns:l="sap.ui.layout"
     xmlns:form="sap.ui.layout.form">
-    <Dialog id="dialogAssegnazioneUO" title="{viewModel>/dialogUOTitolo}" contentWidth="40rem" draggable="true" resizable="false">
+    <Dialog id="dialogAssegnazioneBudgetUO" title="{viewModel>/dialogUOTitolo}" contentWidth="32rem" resizable="false" stretch="false">
         <content>
-            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="12" columnsXL="1" columnsL="1" columnsM="1" class="sapUiSmallMargin">
+            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="12" columnsXL="1" columnsL="1" columnsM="1" class="sapUiNoMarginBegin sapUiNoMarginEnd sapUiSmallMarginTopBottom">
                 <form:content>
-                    <core:Title text="{i18n>titleSezioneTestata}"/>
                     <Label text="{i18n>lblEsercizio}"/>
                     <Text text="{viewModel>/dialogUO/ESERCIZIO}"/>
                     <Label text="{i18n>lblCdCDG}"/>
                     <Text text="{viewModel>/dialogUO/CENTRO_DI_COSTO_DG}"/>
                     <Label text="{i18n>lblCdCUO}" required="true"/>
-                    <Input id="inpCdCUO" value="{viewModel>/dialogUO/CENTRO_DI_COSTO_UO}" maxLength="10" editable="{viewModel>/dialogUOCdCUOEditable}" valueState="{viewModel>/dialogUO/CdCUOValueState}" valueStateText="{viewModel>/dialogUO/CdCUOValueStateText}" liveChange=".onCdCUOLiveChange"/>
+                    <Input width="30rem" id="inpCdCUO" value="{viewModel>/dialogUO/CENTRO_DI_COSTO_UO}" maxLength="10" placeholder="{i18n>phCdCUO}" enabled="{viewModel>/dialogUOCdCUOEditable}" valueState="{viewModel>/dialogUO/CdCUOValueState}" valueStateText="{viewModel>/dialogUO/CdCUOValueStateText}" liveChange=".onCdCUOLiveChange"/>
                     <Label text="{i18n>lblImportoAssegnato}" required="true"/>
-                    <Input id="inpImportoAssegnatoUO" value="{viewModel>/dialogUO/IMPORTO_ASSEGNATO}" maxLength="23" textAlign="End" valueState="{viewModel>/dialogUO/ImportoValueState}" valueStateText="{viewModel>/dialogUO/ImportoValueStateText}" liveChange=".onImportoUOLiveChange"/>
-                    <core:Title text="{i18n>titleSezioneAudit}"/>
-                    <Label text="{i18n>lblImportoConsumato}"/>
-                    <Text text="{path: 'viewModel>/dialogUO/IMPORTO_CONSUMATO', formatter: '.formatter.formatImporto'}"/>
-                    <Label text="{i18n>lblDataAssegnazione}"/>
-                    <Text text="{viewModel>/dialogUO/DATA_ASSEGNAZIONE}"/>
-                    <Label text="{i18n>lblUtenteAssegnazione}"/>
-                    <Text text="{viewModel>/dialogUO/UTENTE_ASSEGNAZIONE}"/>
-                    <Label text="{i18n>lblDataModifica}"/>
-                    <Text text="{viewModel>/dialogUO/DATA_MODIFICA}"/>
-                    <Label text="{i18n>lblUtenteModifica}"/>
-                    <Text text="{viewModel>/dialogUO/UTENTE_MODIFICA}"/>
+                    <Input width="30rem" id="inpImportoUO" value="{viewModel>/dialogUO/IMPORTO_ASSEGNATO}" maxLength="23" textAlign="End" placeholder="{i18n>phImporto}" valueState="{viewModel>/dialogUO/ImportoValueState}" valueStateText="{viewModel>/dialogUO/ImportoValueStateText}" liveChange=".onImportoUOLiveChange"/>
                 </form:content>
             </form:SimpleForm>
         </content>

@@ -1,9 +1,9 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:form="sap.ui.layout.form">
-    <Dialog id="dialogCopiaEsercizio" title="{i18n>titleDialogCopiaEsercizio}" contentWidth="32rem" draggable="true" resizable="false">
+    <Dialog id="dialogCopiaEsercizio" title="{i18n>titleDialogCopiaEsercizio}" contentWidth="32rem" draggable="false" resizable="false">
         <content>
-            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="12" columnsXL="1" columnsL="1" columnsM="1" class="sapUiSmallMargin">
+            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="12" columnsXL="1" columnsL="1" columnsM="1" class="sapUiNoMarginBegin sapUiNoMarginEnd sapUiSmallMarginTopBottom">
                 <form:content>
                     <Label text="{i18n>lblEsercizioDa}" required="true"/>
                     <Select id="selCopiaEsercizioDa" selectedKey="{viewModel>/dialogCopia/esercizioDa}" valueState="{viewModel>/dialogCopia/EsercizioDaValueState}" valueStateText="{viewModel>/dialogCopia/EsercizioDaValueStateText}" change=".onCopiaEsercizioDaChange"/>

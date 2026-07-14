@@ -24,6 +24,13 @@ sap.ui.define([
                 snappedTitle: "",
                 budgetUO: [],
                 writeEnabled: false,
+                dialogModifica: {
+                    ESERCIZIO: "",
+                    CENTRO_DI_COSTO_DG: "",
+                    IMPORTO_ASSEGNATO: "",
+                    ImportoValueState: "None",
+                    ImportoValueStateText: ""
+                },
                 dialogUOTitolo: "",
                 dialogUOCdCUOEditable: true,
                 dialogUO: {
@@ -89,6 +96,7 @@ sap.ui.define([
             oViewModel.setProperty("/DATA_MODIFICA", oItem.DATA_MODIFICA);
             oViewModel.setProperty("/UTENTE_MODIFICA", oItem.UTENTE_MODIFICA);
             oViewModel.setProperty("/snappedTitle", oItem.ESERCIZIO + " \u2013 " + oItem.CENTRO_DI_COSTO_DG);
+            oViewModel.setProperty("/writeEnabled", true);
         },
         _caricaDatiUO: function (sEsercizio, sKostlDg) {
             var oModel = this.getOwnerComponent().getModel();
@@ -162,6 +170,76 @@ sap.ui.define([
             }
             return bValido;
         },
+        onModificaBudgetDG: function () {
+            var oViewModel = this.getView().getModel("viewModel");
+            oViewModel.setProperty("/dialogModifica", {
+                ESERCIZIO: oViewModel.getProperty("/ESERCIZIO"),
+                CENTRO_DI_COSTO_DG: oViewModel.getProperty("/CENTRO_DI_COSTO_DG"),
+                IMPORTO_ASSEGNATO: String(oViewModel.getProperty("/IMPORTO_ASSEGNATO")),
+                ImportoValueState: "None",
+                ImportoValueStateText: ""
+            });
+            if (!this._oDialogModifica) {
+                Fragment.load({
+                    id: this.getView().getId(),
+                    name: "rlbudget.view.fragment.ModificaBudgetDG",
+                    controller: this
+                }).then(function (oDialog) {
+                    this._oDialogModifica = oDialog;
+                    this.getView().addDependent(this._oDialogModifica);
+                    this._oDialogModifica.open();
+                }.bind(this));
+            } else {
+                this._oDialogModifica.open();
+            }
+        },
+        onModificaImportoLiveChange: function () {
+            this.getView().getModel("viewModel").setProperty("/dialogModifica/ImportoValueState", "None");
+            this.getView().getModel("viewModel").setProperty("/dialogModifica/ImportoValueStateText", "");
+        },
+        _validaDialogModifica: function () {
+            var oViewModel = this.getView().getModel("viewModel");
+            var oMod = oViewModel.getProperty("/dialogModifica");
+            var fImporto = parseFloat(oMod.IMPORTO_ASSEGNATO);
+            var fDistribuito = parseFloat(oViewModel.getProperty("/IMPORTO_DISTRIBUITO")) || 0;
+            oViewModel.setProperty("/dialogModifica/ImportoValueState", "None");
+            oViewModel.setProperty("/dialogModifica/ImportoValueStateText", "");
+            if (!oMod.IMPORTO_ASSEGNATO || isNaN(fImporto) || fImporto <= 0) {
+                oViewModel.setProperty("/dialogModifica/ImportoValueState", "Error");
+                oViewModel.setProperty("/dialogModifica/ImportoValueStateText", this._getText("msgImportoObbligatorio"));
+                return false;
+            }
+            if (fImporto < fDistribuito) {
+                oViewModel.setProperty("/dialogModifica/ImportoValueState", "Error");
+                oViewModel.setProperty("/dialogModifica/ImportoValueStateText", this._getText("msgImportoSottoDistribuito"));
+                return false;
+            }
+            return true;
+        },
+        onSalvaModificaBudgetDG: function () {
+            if (!this._validaDialogModifica()) { return; }
+            var oModel = this.getOwnerComponent().getModel();
+            var oMod = this.getView().getModel("viewModel").getProperty("/dialogModifica");
+            var oPayload = {
+                ESERCIZIO: oMod.ESERCIZIO,
+                CENTRO_DI_COSTO_DG: oMod.CENTRO_DI_COSTO_DG,
+                IMPORTO_ASSEGNATO: parseFloat(oMod.IMPORTO_ASSEGNATO.replace(",", ".")).toFixed(2)
+            };
+            oModel.create("/Budget_DG", oPayload, {
+                success: function () {
+                    if (this._oDialogModifica) { this._oDialogModifica.close(); }
+                    MessageBox.success(this._getText("msgSalvataggioOk"), {
+                        onClose: function () {
+                            this._caricaDatiDG(this._sEsercizio, this._sKostlDg);
+                        }.bind(this)
+                    });
+                }.bind(this),
+                error: function (oError) { this._gestisciErrore(oError); }.bind(this)
+            });
+        },
+        onAnnullaModificaBudgetDG: function () {
+            if (this._oDialogModifica) { this._oDialogModifica.close(); }
+        },
         onNavBack: function () {
             this.getOwnerComponent().getRouter().navTo("RouteLista");
         },
@@ -210,7 +288,7 @@ sap.ui.define([
             if (!this._oDialogUO) {
                 Fragment.load({
                     id: this.getView().getId(),
-                    name: "rlbudget.fragment.AssegnazioneBudgetUO",
+                    name: "rlbudget.view.fragment.AssegnazioneBudgetUO",
                     controller: this
                 }).then(function (oDialog) {
                     this._oDialogUO = oDialog;

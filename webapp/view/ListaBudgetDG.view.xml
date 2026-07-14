@@ -84,8 +84,8 @@
                             <Text text="{viewModel>CENTRO_DI_COSTO_DG}"/>
                             <ObjectNumber number="{path: 'viewModel>IMPORTO_ASSEGNATO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
                             <ObjectNumber number="{path: 'viewModel>IMPORTO_DISTRIBUITO', formatter: '.formatter.formatImporto'}" textAlign="End"/>
-                            <ObjectNumber number="{parts: [{path: 'viewModel>IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatResiduoDG'}" state="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatStatoResiduoDG'}" textAlign="End"/>
-                            <ObjectStatus text="{parts: [{path: 'viewModel>IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatLabelStatoResiduoDG'}" state="{parts: [{path: 'IMPORTO_ASSEGNATO'}, {path: 'IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatStatoResiduoDG'}"/>
+                            <ObjectNumber number="{parts: [{path: 'viewModel>IMPORTO_ASSEGNATO'}, {path: 'viewModel>IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatResiduoDG'}" state="{parts: [{path: 'viewModel>IMPORTO_ASSEGNATO'}, {path: 'viewModel>IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatStatoResiduoDG'}" textAlign="End"/>
+                            <ObjectStatus text="{parts: [{path: 'viewModel>IMPORTO_ASSEGNATO'}, {path: 'viewModel>IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatLabelStatoResiduoDG'}" state="{parts: [{path: 'viewModel>IMPORTO_ASSEGNATO'}, {path: 'viewModel>IMPORTO_DISTRIBUITO'}], formatter: '.formatter.formatStatoResiduoDG'}"/>
                             <Text text="{path: 'viewModel>DATA_ASSEGNAZIONE', formatter: '.formatter.formatData'}"/>
                             <Text text="{viewModel>UTENTE_ASSEGNAZIONE}"/>
                         </cells>
