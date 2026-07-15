@@ -2,10 +2,16 @@
   "welcomeFile": "/index.html",
   "authenticationMethod": "route",
   "routes": [
-     {
+    {
       "source": "^/s4/(.*)$",
-      "target": "$1",
+      "target": "/sap/$1",
       "authenticationType": "none",
+      "destination": "S4_PRINCIPAL_PROPAGATION"
+    },
+    {
+      "source": "^/sap/opu/odata/(.*)$",
+      "target": "/sap/opu/odata/$1",
+      "authenticationType": "xsuaa",
       "destination": "S4_PRINCIPAL_PROPAGATION"
     },
     {

@@ -10,6 +10,10 @@ sap.ui.define([
     "use strict";
     return Controller.extend("rlbudget.controller.DettaglioBudgetDG", {
         formatter: formatter,
+        _getServiceBase: function () {
+            var bLocale = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+            return bLocale ? "/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/" : "/s4/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/";
+        },
         onInit: function () {
             var oViewModel = new JSONModel({
                 ESERCIZIO: "",
@@ -244,7 +248,7 @@ sap.ui.define([
             if (!this._validaDialogModifica()) { return; }
             var oModel = this.getOwnerComponent().getModel();
             var oMod = this.getView().getModel("viewModel").getProperty("/dialogModifica");
-            var sUrl = oModel.sServiceUrl + "/Budget_DG(ESERCIZIO='" + oMod.ESERCIZIO + "',CENTRO_DI_COSTO_DG='" + oMod.CENTRO_DI_COSTO_DG + "')";
+            var sUrl = this._getServiceBase() + "Budget_DG(ESERCIZIO='" + oMod.ESERCIZIO + "',CENTRO_DI_COSTO_DG='" + oMod.CENTRO_DI_COSTO_DG + "')";
             var oPayload = {
                 ESERCIZIO: oMod.ESERCIZIO,
                 CENTRO_DI_COSTO_DG: oMod.CENTRO_DI_COSTO_DG,
