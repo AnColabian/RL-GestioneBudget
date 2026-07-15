@@ -13,24 +13,24 @@
                     <PropertyRef Name="ESERCIZIO"/>
                     <PropertyRef Name="CENTRO_DI_COSTO_DG"/>
                 </Key>
-                <Property Name="ESERCIZIO" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fiscal Year" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="CENTRO_DI_COSTO_DG" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cost Center" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="IMPORTO_ASSEGNATO" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Amount" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ESERCIZIO" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fiscal Year" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CENTRO_DI_COSTO_DG" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cost Center" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IMPORTO_ASSEGNATO" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Amount" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="IMPORTO_DISTRIBUITO" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Amount" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="DATA_ASSEGNAZIONE" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="UTENTE_ASSEGNAZIONE" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="UTENTE_MODIFICA" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DATA_MODIFICA" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DATA_MODIFICA" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="Budget_UO" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="ESERCIZIO"/>
                     <PropertyRef Name="CENTRO_DI_COSTO_UO"/>
                 </Key>
-                <Property Name="ESERCIZIO" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fiscal Year" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="CENTRO_DI_COSTO_UO" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cost Center" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="CENTRO_DI_COSTO_DG" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cost Center" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="IMPORTO_ASSEGNATO" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Amount" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ESERCIZIO" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fiscal Year" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CENTRO_DI_COSTO_UO" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cost Center" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CENTRO_DI_COSTO_DG" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cost Center" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IMPORTO_ASSEGNATO" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Amount" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="IMPORTO_CONSUMATO" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2" sap:unicode="false" sap:label="Amount" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="DATA_ASSEGNAZIONE" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="UTENTE_ASSEGNAZIONE" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -38,8 +38,8 @@
                 <Property Name="DATA_MODIFICA" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityContainer Name="ZMM_ASSEGNAZIONE_BUDGET_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
-                <EntitySet Name="Budget_DG" EntityType="ZMM_ASSEGNAZIONE_BUDGET_SRV.Budget_DG" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="Budget_UO" EntityType="ZMM_ASSEGNAZIONE_BUDGET_SRV.Budget_UO" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Budget_DG" EntityType="ZMM_ASSEGNAZIONE_BUDGET_SRV.Budget_DG" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Budget_UO" EntityType="ZMM_ASSEGNAZIONE_BUDGET_SRV.Budget_UO" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
             </EntityContainer>
             <atom:link rel="self" href="https://g4d-basic.sap.ariaspa.local:44300/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/$metadata"
                 xmlns:atom="http://www.w3.org/2005/Atom"/>
