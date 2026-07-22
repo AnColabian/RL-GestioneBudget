@@ -220,30 +220,6 @@ sap.ui.define([
             }
             return true;
         },
-        /* manca l'implementazione getEntity singola per uniformare alla gestione tramite oModel.  
-        
-        onSalvaModificaBudgetDG: function () {
-              if (!this._validaDialogModifica()) { return; }
-              var oModel = this.getOwnerComponent().getModel();
-              var oMod = this.getView().getModel("viewModel").getProperty("/dialogModifica");
-              var sPath = "/Budget_DG(ESERCIZIO='" + oMod.ESERCIZIO + "',CENTRO_DI_COSTO_DG='" + oMod.CENTRO_DI_COSTO_DG + "')";
-              var oPayload = {
-                  ESERCIZIO: oMod.ESERCIZIO,
-                  CENTRO_DI_COSTO_DG: oMod.CENTRO_DI_COSTO_DG,
-                  IMPORTO_ASSEGNATO: parseFloat(oMod.IMPORTO_ASSEGNATO.replace(",", ".")).toFixed(2)
-              };
-              oModel.update(sPath, oPayload, {
-                  success: function () {
-                      if (this._oDialogModifica) { this._oDialogModifica.close(); }
-                      MessageBox.success(this._getText("msgSalvataggioOk"), {
-                          onClose: function () {
-                              this._caricaDatiDG(this._sEsercizio, this._sKostlDg);
-                          }.bind(this)
-                      });
-                  }.bind(this),
-                  error: function (oError) { this._gestisciErrore(oError); }.bind(this)
-              });
-          }, */
         onSalvaModificaBudgetDG: function () {
             if (!this._validaDialogModifica()) { return; }
             var oModel = this.getOwnerComponent().getModel();
