@@ -11,7 +11,8 @@ sap.ui.define([
     return Controller.extend("rlbudget.controller.DettaglioBudgetDG", {
         formatter: formatter,
         _getServiceBase: function () {
-            var bLocale = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+            var sHost = window.location.hostname;
+            var bLocale = sHost === "localhost" || sHost === "127.0.0.1" || sHost.indexOf("applicationstudio.cloud.sap") !== -1;
             return bLocale ? "/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/" : "/s4/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/";
         },
         onInit: function () {
