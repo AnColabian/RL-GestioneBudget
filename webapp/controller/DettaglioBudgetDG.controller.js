@@ -11,9 +11,10 @@ sap.ui.define([
     return Controller.extend("rlbudget.controller.DettaglioBudgetDG", {
         formatter: formatter,
         _getServiceBase: function () {
-            var sHost = window.location.hostname;
+           /*  var sHost = window.location.hostname;
             var bLocale = sHost === "localhost" || sHost === "127.0.0.1" || sHost.indexOf("applicationstudio.cloud.sap") !== -1;
-            return bLocale ? "/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/" : "/s4/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/";
+            return bLocale ? "/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/" : "/s4/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/"; */
+            return "/sap/opu/odata/sap/ZMM_ASSEGNAZIONE_BUDGET_SRV/";
         },
         onInit: function () {
             var oViewModel = new JSONModel({
@@ -241,7 +242,7 @@ sap.ui.define([
                         "Accept": "application/json"
                     },
                     data: JSON.stringify(oPayload),
-                    success: function () {
+                    success: function (data, b, c) {
                         if (this._oDialogModifica) { this._oDialogModifica.close(); }
                         MessageBox.success(this._getText("msgSalvataggioOk"), {
                             onClose: function () {
