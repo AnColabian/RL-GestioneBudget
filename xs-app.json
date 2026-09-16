@@ -12,7 +12,8 @@
       "source": "^/sap/opu/odata/(.*)$",
       "target": "/sap/opu/odata/$1",
       "authenticationType": "xsuaa",
-      "destination": "S4_PRINCIPAL_PROPAGATION"
+      "destination": "S4_PRINCIPAL_PROPAGATION",
+      "csrfProtection": false
     },
     {
       "source": "^/resources/(.*)$",

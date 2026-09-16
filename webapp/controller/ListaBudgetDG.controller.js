@@ -270,15 +270,19 @@ sap.ui.define([
                 CENTRO_DI_COSTO_DG: oCrea.CENTRO_DI_COSTO_DG.trim(),
                 IMPORTO_ASSEGNATO: fImporto.toFixed(2)
             };
-            oModel.create("/Budget_DG", oPayload, {
-                success: function () {
-                    if (this._oDialogCrea) { this._oDialogCrea.close(); }
-                    MessageBox.success(this._getText("msgSalvataggioOk"), {
-                        onClose: function () { this._caricaDati(); }.bind(this)
-                    });
-                }.bind(this),
-                error: function (oError) { this._gestisciErrore(oError); }.bind(this)
-            });
+            oModel.refreshSecurityToken(function () {
+                oModel.create("/Budget_DG", oPayload, {
+                    success: function () {
+                        if (this._oDialogCrea) { this._oDialogCrea.close(); }
+                        MessageBox.success(this._getText("msgSalvataggioOk"), {
+                            onClose: function () { this._caricaDati(); }.bind(this)
+                        });
+                    }.bind(this),
+                    error: function (oError) { this._gestisciErrore(oError); }.bind(this)
+                });
+            }.bind(this), function (oError) {
+                this._gestisciErrore(oError);
+            }.bind(this), false);
         },
         onAnnullaCreaBudgetDG: function () {
             if (this._oDialogCrea) {
